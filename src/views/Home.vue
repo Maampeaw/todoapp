@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Welcome to my todo app</h1>
+    <div>
+      <div id='todo-card' v-for='todo in getTodoItems' :key='todo.activity'>
+      <div class="activity">{{todo.activity}}</div>
+      <div class="description">{{todo.description}}</div>
+
+      <div><button class="del" @click='deleteTodoItem(todo.id)'>Delete todo</button></div>
+    </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+   
+  },
+  computed: {
+    ...mapGetters(['getTodoItems'])
+  },
+  methods:{
+    ...mapActions(['deleteTodoItem'])
   }
 }
 </script>
